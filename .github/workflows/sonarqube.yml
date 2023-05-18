@@ -33,8 +33,11 @@ jobs:
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
           cd sonarqube-scanner-gradle/gradle-basic
-          ./gradlew sonar --info
+          ./gradlew sonar --info \
+          -Dsonar.projectKey=exampleProject2 \
+          -Dsonar.projectName='Example of SonarQube Scanner for Gradle Usage' \
+          -Dsonar.host.url=https://d91a-177-92-105-94.ngrok-free.app \
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }}  ;
